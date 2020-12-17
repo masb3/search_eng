@@ -2,8 +2,8 @@ import os
 
 
 class Config:
-    DEBUG = True
-    TESTING = True
+    DEBUG = False
+    TESTING = False
     CSRF_ENABLED = True
     GOOGLE_API = os.environ.get("GOOGLE_API")
     GOOGLE_CX = os.environ.get("GOOGLE_CX")
