@@ -5,21 +5,29 @@
     <title>Top 10 from Google & Bing</title>
 
     <style>
-        .originalSnippet {
+        .customSnippet {
             display: none
             }
 
-        .snippet:hover .originalSnippet {
+        input:checked ~ .snippet .originalSnippet {
+            display: none
+        }
+
+        input:checked ~ .snippet .customSnippet {
+            display: block
+            }
+
+        input:checked ~ .snippet:hover .originalSnippet {
             display: block
         }
 
-        .snippet:hover .customSnippet {
+        input:checked ~ .snippet:hover .customSnippet {
             display: none
             }
-
     </style>
 </head>
 <body>
+
 <div align="center">
     <h1>Top 10 from Google & Bing</h1>
     <form action="/" method="post">
@@ -30,6 +38,9 @@
 </div>
 
 {% if items %}
+    <input id="chkbox1" type="checkbox" name="box" class="cbox">
+    Show custom snippet and original on hover (only original is showed by default)<br>
+
     <b>Query: {{ query }}</b>
     <h3>Request-Response time (s):</h3>
     <li><b>Google API: {{ google_ts }}</b></li>
@@ -54,6 +65,7 @@
             </div>
         </div>
     {% endfor %}
+    <br>
 {% endif %}
 </body>
 </html>
