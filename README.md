@@ -9,6 +9,9 @@ Beautifulsoup is used to simplify parsing html pages to fetch custom snippets.
 - <b>Top 10 combined:</b>  
 First are the pages returned by both APIs, next by rotation Bing-Google results up to count 10.  
 
+- <b>Custom snippet:</b>  
+Fetched from <i>\<meta name="description" content=""></i>, if not present then from <i>title</i>.  
+
 - <b>Challenges:</b>  
 Custom snippet generation  
 Correct CSS to fullfill requirement: show original snippet if checkbox not checked, otherwise show custom snippet while showing original on snippet hover.    
