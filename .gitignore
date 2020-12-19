@@ -1,5 +1,0 @@
-.idea
-venv
-*.pyc
-.env
-del.py
