@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 10 from Google & Bing</title>
+
+    <style>
+        .customSnippet {
+            display: none
+            }
+
+        input:checked ~ .snippet .originalSnippet {
+            display: none
+        }
+
+        input:checked ~ .snippet .customSnippet {
+            display: block
+            }
+
+        input:checked ~ .snippet:hover .originalSnippet {
+            display: block
+        }
+
+        input:checked ~ .snippet:hover .customSnippet {
+            display: none
+            }
+    </style>
+</head>
+<body>
+
+<div align="center">
+    <h1>Top 10 from Google & Bing</h1>
+    <form action="/" method="post">
+      <label for="query"></label>
+      <input type="text" id="query" name="query" size="50"><br><br>
+      <input type="submit" value="Search">
+    </form>
+</div>
+
+{% if items %}
+    <input id="chkbox1" type="checkbox" name="box" class="cbox">
+    Show custom snippet and original on hover (only original is showed by default)<br>
+
+    <b>Query: {{ query }}</b>
+    <h3>Request-Response time (s):</h3>
+    <li><b>Google API: {{ google_ts }}</b></li>
+    <li><b>Bing API: {{ bing_ts }}</b></li>
+    {% for item in items %}
+        &emsp;{{ loop.index }}. URL custom snippet fetch =
+        {% if item.snippetTimeout %}
+            <font color="red"> <b>{{ item.customSnippetFetchTs }}</b> - Snippet fetch timed out </font><br>
+        {% else %}
+            {{ item.customSnippetFetchTs }}<br>
+        {% endif %}
+    {% endfor %}
+    <li><b>Total: {{ total_time }}</b> (Longest API call + Longest webpage read content + minor processing time)</li>
+    {% for item in items %}
+        <h3>{{ loop.index }}. {{ item.engine }} <a href="{{ item.url }}">{{ item.title }}</a></h3>
+        <div class="snippet">
+            <div class="originalSnippet">
+                {{ item.snippet_orig|safe }}<br>
+            </div>
+            <div class="customSnippet">
+                <i>{{ item.customSnippet|safe }}</i><br>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+{% endif %}
+</body>
+</html>
